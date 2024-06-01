@@ -1,4 +1,8 @@
 ﻿using MongoDB.Driver;
+using System.Configuration;
+using Microsoft.Extensions.Configuration;
+using System.IO;
+
 
 namespace PersonalFinanceManager.Utils
 {
@@ -9,7 +13,7 @@ namespace PersonalFinanceManager.Utils
 
         static DatabaseHelper()
         {
-            var connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["MongoDbConnectionString"].ConnectionString;
+            var connectionString = ConfigurationManager.ConnectionStrings["MongoDbConnectionString"].ConnectionString;
             _client = new MongoClient(connectionString);
             _database = _client.GetDatabase("PersonalFinanceManagerDB");
         }
