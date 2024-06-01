@@ -21,12 +21,12 @@ namespace PersonalFinanceManager.Forms
 
             if (_userController.RegisterUser(username, password))
             {
-                MessageBox.Show("Registration successful. You can now log in.");
+                MessageBox.Show("Registration successful!");
                 this.Close();
             }
             else
             {
-                MessageBox.Show("Username already exists.");
+                MessageBox.Show("Registration failed.");
             }
         }
     }

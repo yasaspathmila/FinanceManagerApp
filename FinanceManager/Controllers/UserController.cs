@@ -28,5 +28,11 @@ namespace PersonalFinanceManager.Controllers
             var user = _users.Find(u => u.Username == username && u.Password == password).FirstOrDefault();
             return user != null;
         }
+
+        public bool AuthenticateUser(string username, string password)
+        {
+            // Placeholder authentication logic
+            return username == "admin" && password == "password";
+        }
     }
 }

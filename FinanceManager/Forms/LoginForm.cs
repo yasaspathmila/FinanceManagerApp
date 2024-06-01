@@ -1,5 +1,4 @@
-﻿using FinanceManager.Forms;
-using PersonalFinanceManager.Controllers;
+﻿using PersonalFinanceManager.Controllers;
 using System;
 using System.Windows.Forms;
 
@@ -20,9 +19,10 @@ namespace PersonalFinanceManager.Forms
             var username = txtUsername.Text;
             var password = txtPassword.Text;
 
-            if (_userController.LoginUser(username, password))
+            if (_userController.AuthenticateUser(username, password))
             {
-                MainForm mainForm = new MainForm(username);
+                MessageBox.Show("Login successful!");
+                var mainForm = new MainForm(username);
                 mainForm.Show();
                 this.Hide();
             }
@@ -30,12 +30,6 @@ namespace PersonalFinanceManager.Forms
             {
                 MessageBox.Show("Invalid username or password.");
             }
-        }
-
-        private void btnRegister_Click(object sender, EventArgs e)
-        {
-            RegisterForm registerForm = new RegisterForm();
-            registerForm.Show();
         }
     }
 }

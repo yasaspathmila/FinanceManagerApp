@@ -25,7 +25,7 @@ namespace PersonalFinanceManager.Forms
             var payee = txtPayee.Text;
             var date = dtpDate.Value;
 
-            _transactionController.AddTransaction(accountId, type, amount, category, payee, date);
+            _transactionController.AddTransaction(_username, accountId, type, amount, category, payee, date);
             MessageBox.Show("Transaction saved successfully.");
             this.Close();
         }
