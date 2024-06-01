@@ -19,7 +19,8 @@ namespace PersonalFinanceManager.Forms
             var username = txtUsername.Text;
             var password = txtPassword.Text;
 
-            if (_userController.AuthenticateUser(username, password))
+            bool isAuthenticated = _userController.AuthenticateUser(username, password).Result;
+            if (isAuthenticated)
             {
                 MessageBox.Show("Login successful!");
                 var mainForm = new MainForm(username);

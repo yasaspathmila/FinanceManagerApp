@@ -2,6 +2,7 @@
 using PersonalFinanceManager.Models;
 using PersonalFinanceManager.Utils;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace PersonalFinanceManager.Controllers
 {
@@ -29,10 +30,14 @@ namespace PersonalFinanceManager.Controllers
             return user != null;
         }
 
-        public bool AuthenticateUser(string username, string password)
+        public async Task<bool> AuthenticateUser(string username, string password)
         {
-            // Placeholder authentication logic
-            return username == "admin" && password == "password";
+            var user = await _users.Find(u => u.Username == username).FirstOrDefaultAsync();
+            if (user != null && user.Password == password)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
