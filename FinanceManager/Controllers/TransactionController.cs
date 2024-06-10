@@ -20,19 +20,6 @@ namespace PersonalFinanceManager.Controllers
 
         }
 
-        public void AddTransaction(string accountId, string type, double amount, string category, string payee, DateTime date)
-        {
-            var transaction = new Transaction
-            {
-                AccountId = accountId,
-                Type = type,
-                Amount = amount,
-                Category = category,
-                Payee = payee,
-                Date = date
-            };
-            _transactions.InsertOne(transaction);
-        }
 
         public void AddTransaction(string username, string accountId, string type, double amount, string category, string payee, DateTime date)
         {
@@ -46,7 +33,8 @@ namespace PersonalFinanceManager.Controllers
             // Create a new transaction object
             var transaction = new Transaction
             {
-                Id = user.Id, // Assuming the User object has an Id of type ObjectId
+                Id = ObjectId.GenerateNewId(),
+                UserId = user.Id, 
                 AccountId = accountId,
                 Type = type,
                 Amount = amount,
@@ -70,7 +58,7 @@ namespace PersonalFinanceManager.Controllers
                 throw new ArgumentException("Invalid user ID format");
             }
 
-            return _transactions.Find(t => t.Id == objectId).ToList();
+            return _transactions.Find(t => t.UserId == objectId).ToList();
         }
 
     }

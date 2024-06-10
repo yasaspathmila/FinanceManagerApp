@@ -8,6 +8,7 @@ namespace PersonalFinanceManager.Models
     {
         [BsonId]
         public ObjectId Id { get; set; }
+        public ObjectId UserId { get; set; }
         public string AccountId { get; set; }
         public string Type { get; set; } // Income or Expense
         public double Amount { get; set; }
