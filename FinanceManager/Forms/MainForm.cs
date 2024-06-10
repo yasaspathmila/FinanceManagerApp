@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace PersonalFinanceManager.Forms
 {
@@ -11,6 +10,11 @@ namespace PersonalFinanceManager.Forms
         {
             InitializeComponent();
             _username = username;
+        }
+
+        private void MainForm_Load(object sender, System.EventArgs e)
+        {
+
         }
     }
 }

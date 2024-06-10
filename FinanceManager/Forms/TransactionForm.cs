@@ -29,5 +29,20 @@ namespace PersonalFinanceManager.Forms
             MessageBox.Show("Transaction saved successfully.");
             this.Close();
         }
+
+        private void TransactionForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtAmount_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

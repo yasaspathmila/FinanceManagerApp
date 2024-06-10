@@ -30,10 +30,10 @@ namespace PersonalFinanceManager.Controllers
             return user != null;
         }
 
-        public async Task<bool> AuthenticateUser(string username, string password)
+        public  bool AuthenticateUser(string username, string password)
         {
-            var user = await _users.Find(u => u.Username == username).FirstOrDefaultAsync();
-            if (user != null && user.Password == password)
+            var user =  _users.Find(u => u.Username == username).Project(u => new { Username = u.Username, Password = u.Password }).FirstOrDefaultAsync();
+            if (user != null && user.Result.Password == password)
             {
                 return true;
             }

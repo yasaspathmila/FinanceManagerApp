@@ -14,16 +14,17 @@ namespace PersonalFinanceManager.Forms
             _userController = new UserController();
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private async void btnLogin_Click(object sender, EventArgs e)
         {
-            var username = txtUsername.Text;
-            var password = txtPassword.Text;
+            string username = txtUsername.Text;
+            string password = txtPassword.Text;
 
-            bool isAuthenticated = _userController.AuthenticateUser(username, password).Result;
+            bool isAuthenticated = _userController.AuthenticateUser(username, password);
+
             if (isAuthenticated)
             {
                 MessageBox.Show("Login successful!");
-                var mainForm = new MainForm(username);
+                MainForm mainForm = new MainForm(username);
                 mainForm.Show();
                 this.Hide();
             }
@@ -32,5 +33,11 @@ namespace PersonalFinanceManager.Forms
                 MessageBox.Show("Invalid username or password.");
             }
         }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

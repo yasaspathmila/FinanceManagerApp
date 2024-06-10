@@ -4,6 +4,7 @@ using PersonalFinanceManager.Models;
 using PersonalFinanceManager.Utils;
 using System;
 using System.Collections.Generic;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace PersonalFinanceManager.Controllers
 {
@@ -58,8 +59,10 @@ namespace PersonalFinanceManager.Controllers
             _transactions.InsertOne(transaction);
         }
 
-        public List<Transaction> GetTransactions(string userId)
+        public List<Transaction> GetTransactions(string username)
         {
+            var user = _users.Find(u => u.Username == username).FirstOrDefault();
+            string userId = user.Id.ToString();
             // Convert userId to ObjectId
             ObjectId objectId;
             if (!ObjectId.TryParse(userId, out objectId))
