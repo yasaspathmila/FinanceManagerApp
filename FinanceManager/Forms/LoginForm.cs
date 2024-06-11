@@ -39,5 +39,11 @@ namespace PersonalFinanceManager.Forms
 
         }
 
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+            var registerForm = new RegisterForm();
+            registerForm.Show();
+        }
+
     }
 }

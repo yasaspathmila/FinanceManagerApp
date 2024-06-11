@@ -29,5 +29,10 @@ namespace PersonalFinanceManager.Forms
                 MessageBox.Show("Registration failed.");
             }
         }
+
+        private void RegisterForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

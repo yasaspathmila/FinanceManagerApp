@@ -8,5 +8,10 @@ namespace PersonalFinanceManager.Forms
         {
             InitializeComponent();
         }
+
+        private void dgvReports_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

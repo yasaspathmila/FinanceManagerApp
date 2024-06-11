@@ -12,3 +12,5 @@ namespace PersonalFinanceManager.Models
         public double Balance { get; set; }
     }
 }
+
+// transactions waladi me account eke balance eka update karena widiyata hadanna ona

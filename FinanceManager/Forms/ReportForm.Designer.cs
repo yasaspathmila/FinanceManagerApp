@@ -29,12 +29,13 @@
             this.dgvReports.RowHeadersWidth = 51;
             this.dgvReports.Size = new System.Drawing.Size(1035, 524);
             this.dgvReports.TabIndex = 0;
+            this.dgvReports.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReports_CellContentClick);
             // 
             // ReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(742, 449);
+            this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.dgvReports);
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ReportForm";

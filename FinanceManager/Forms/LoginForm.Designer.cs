@@ -8,6 +8,8 @@
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnRegister;
 
         private void InitializeComponent()
         {
@@ -16,6 +18,8 @@
             this.btnLogin = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnRegister = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtUsername
@@ -65,11 +69,32 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Password";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(117, 275);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(148, 16);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Regester as a new user";
+            // 
+            // btnRegister
+            // 
+            this.btnRegister.Location = new System.Drawing.Point(133, 311);
+            this.btnRegister.Name = "btnRegister";
+            this.btnRegister.Size = new System.Drawing.Size(100, 24);
+            this.btnRegister.TabIndex = 2;
+            this.btnRegister.Text = "Register";
+            this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(379, 321);
+            this.ClientSize = new System.Drawing.Size(372, 375);
+            this.Controls.Add(this.btnRegister);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnLogin);
@@ -93,5 +118,6 @@
             base.Dispose(disposing);
         }
 
+ 
     }
 }
