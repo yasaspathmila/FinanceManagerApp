@@ -76,13 +76,13 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(148, 16);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Regester as a new user";
+            this.label3.Text = "Register as a new user";
             // 
             // btnRegister
             // 
             this.btnRegister.Location = new System.Drawing.Point(133, 311);
             this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(100, 24);
+            this.btnRegister.Size = new System.Drawing.Size(100, 30);
             this.btnRegister.TabIndex = 2;
             this.btnRegister.Text = "Register";
             this.btnRegister.UseVisualStyleBackColor = true;

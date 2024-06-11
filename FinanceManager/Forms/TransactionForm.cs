@@ -1,6 +1,8 @@
 ﻿using PersonalFinanceManager.Controllers;
 using System;
 using System.Windows.Forms;
+using PersonalFinanceManager.Models;
+using System.Data.Common;
 
 namespace PersonalFinanceManager.Forms
 {
@@ -14,20 +16,37 @@ namespace PersonalFinanceManager.Forms
             InitializeComponent();
             _username = username;
             _transactionController = new TransactionController();
+            
         }
+
 
         private void btnSaveTransaction_Click(object sender, EventArgs e)
         {
-            var accountId = txtAccountId.Text;
-            var type = cmbType.SelectedItem.ToString();
-            var amount = double.Parse(txtAmount.Text);
-            var category = cmbCategory.SelectedItem.ToString();
-            var payee = txtPayee.Text;
-            var date = dtpDate.Value;
+            try
+            {
+                var accountId = txtAccountId.Text;
+                var type = cmbType.SelectedItem.ToString();
+                var amount = double.Parse(txtAmount.Text);
+                var category = cmbCategory.SelectedItem.ToString();
+                var payee = txtPayee.Text;
+                var date = dtpDate.Value;
 
-            _transactionController.AddTransaction(_username, accountId, type, amount, category, payee, date);
-            MessageBox.Show("Transaction saved successfully.");
-            this.Close();
+                
+                bool isSuccess = _transactionController.AddTransaction(_username, accountId, type, amount, category, payee, date);
+                if (isSuccess)
+                {
+                    MessageBox.Show("Transaction saved successfully.");
+                    this.Close();
+                }
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Please enter valid data.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void TransactionForm_Load(object sender, EventArgs e)

@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using System;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace PersonalFinanceManager.Models
@@ -7,9 +8,10 @@ namespace PersonalFinanceManager.Models
     {
         [BsonId]
         public ObjectId Id { get; set; }
-        public string UserId { get; set; }
+        public string Username { get; set; }
+        public double Amount { get; set; }
         public string Category { get; set; }
-        public double AllocatedAmount { get; set; }
-        public double SpentAmount { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
     }
 }

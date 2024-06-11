@@ -1,4 +1,7 @@
-﻿using MongoDB.Driver;
+﻿using System;
+using System.Collections.Generic;
+using MongoDB.Bson;
+using MongoDB.Driver;
 using PersonalFinanceManager.Models;
 using PersonalFinanceManager.Utils;
 
@@ -13,42 +16,45 @@ namespace PersonalFinanceManager.Controllers
             _budgets = DatabaseHelper.GetCollection<Budget>("Budgets");
         }
 
-        public void SetBudget(string userId, string category, double amount)
+        public void AddBudget(Budget budget)
         {
-            var budget = _budgets.Find(b => b.UserId == userId && b.Category == category).FirstOrDefault();
-            if (budget == null)
-            {
-                budget = new Budget
-                {
-                    UserId = userId,
-                    Category = category,
-                    AllocatedAmount = amount,
-                    SpentAmount = 0
-                };
-                _budgets.InsertOne(budget);
-            }
-            else
-            {
-                budget.AllocatedAmount = amount;
-                _budgets.ReplaceOne(b => b.Id == budget.Id, budget);
-            }
+            _budgets.InsertOne(budget);
         }
 
-        public void UpdateBudget(string userId, string category, double amount, string type)
+        public List<Budget> GetBudgets(string username)
         {
-            var budget = _budgets.Find(b => b.UserId == userId && b.Category == category).FirstOrDefault();
-            if (budget != null)
+            return _budgets.Find(b => b.Username == username).ToList();
+        }
+
+        public bool IsWithinBudget(string username, string category, double amount)
+        {
+            var currentDate = DateTime.Now;
+            var budget = _budgets.Find(b => b.Username == username && b.Category == category && b.StartDate <= currentDate && b.EndDate >= currentDate).FirstOrDefault();
+
+            if (budget == null)
             {
-                if (type == "Income")
-                {
-                    budget.AllocatedAmount += amount;
-                }
-                else
-                {
-                    budget.SpentAmount += amount;
-                }
-                _budgets.ReplaceOne(b => b.Id == budget.Id, budget);
+                return true; // No budget set for this category, so it's within budget by default
             }
+
+            var totalSpent = GetTotalSpent(username, category, budget.StartDate, budget.EndDate);
+            return totalSpent + amount <= budget.Amount;
+        }
+
+        private double GetTotalSpent(string username, string category, DateTime startDate, DateTime endDate)
+        {
+            // This should interact with your transactions collection to get the total spent
+            // Assuming you have a TransactionController that can fetch transactions
+
+            var transactionController = new TransactionController();
+            var transactions = transactionController.GetTransactionsByCategory(username, category, startDate, endDate);
+            double totalSpent = 0;
+
+            foreach (var transaction in transactions)
+            {
+                totalSpent += transaction.Amount;
+            }
+
+            return totalSpent;
         }
     }
 }

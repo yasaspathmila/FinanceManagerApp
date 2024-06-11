@@ -12,6 +12,8 @@ namespace PersonalFinanceManager.Forms
         private System.Windows.Forms.ToolStripMenuItem transactionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewTransactionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addTransactionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem budgetToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addBudgetToolStripMenuItem;
         private System.Windows.Forms.Button btnViewReports;
 
         protected override void Dispose(bool disposing)
@@ -26,12 +28,14 @@ namespace PersonalFinanceManager.Forms
         private void InitializeComponent()
         {
             this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewTransactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addTransactionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnViewReports = new System.Windows.Forms.Button();
+            this.budgetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addBudgetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -40,12 +44,36 @@ namespace PersonalFinanceManager.Forms
             this.menuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.transactionsToolStripMenuItem,
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.budgetToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(1067, 28);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip";
+            // 
+            // transactionsToolStripMenuItem
+            // 
+            this.transactionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewTransactionsToolStripMenuItem,
+            this.addTransactionToolStripMenuItem});
+            this.transactionsToolStripMenuItem.Name = "transactionsToolStripMenuItem";
+            this.transactionsToolStripMenuItem.Size = new System.Drawing.Size(104, 24);
+            this.transactionsToolStripMenuItem.Text = "Transactions";
+            // 
+            // viewTransactionsToolStripMenuItem
+            // 
+            this.viewTransactionsToolStripMenuItem.Name = "viewTransactionsToolStripMenuItem";
+            this.viewTransactionsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.viewTransactionsToolStripMenuItem.Text = "View Transactions";
+            this.viewTransactionsToolStripMenuItem.Click += new System.EventHandler(this.viewTransactionsToolStripMenuItem_Click);
+            // 
+            // addTransactionToolStripMenuItem
+            // 
+            this.addTransactionToolStripMenuItem.Name = "addTransactionToolStripMenuItem";
+            this.addTransactionToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.addTransactionToolStripMenuItem.Text = "Add Transaction";
+            this.addTransactionToolStripMenuItem.Click += new System.EventHandler(this.addTransactionToolStripMenuItem_Click);
             // 
             // fileToolStripMenuItem
             // 
@@ -62,39 +90,31 @@ namespace PersonalFinanceManager.Forms
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
-            // transactionsToolStripMenuItem
-            // 
-            this.transactionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.viewTransactionsToolStripMenuItem,
-            this.addTransactionToolStripMenuItem});
-            this.transactionsToolStripMenuItem.Name = "transactionsToolStripMenuItem";
-            this.transactionsToolStripMenuItem.Size = new System.Drawing.Size(104, 24);
-            this.transactionsToolStripMenuItem.Text = "Transactions";
-            // 
-            // viewTransactionsToolStripMenuItem
-            // 
-            this.viewTransactionsToolStripMenuItem.Name = "viewTransactionsToolStripMenuItem";
-            this.viewTransactionsToolStripMenuItem.Size = new System.Drawing.Size(209, 26);
-            this.viewTransactionsToolStripMenuItem.Text = "View Transactions";
-            this.viewTransactionsToolStripMenuItem.Click += new System.EventHandler(this.viewTransactionsToolStripMenuItem_Click);
-            // 
-            // addTransactionToolStripMenuItem
-            // 
-            this.addTransactionToolStripMenuItem.Name = "addTransactionToolStripMenuItem";
-            this.addTransactionToolStripMenuItem.Size = new System.Drawing.Size(209, 26);
-            this.addTransactionToolStripMenuItem.Text = "Add Transaction";
-            this.addTransactionToolStripMenuItem.Click += new System.EventHandler(this.addTransactionToolStripMenuItem_Click);
-            // 
             // btnViewReports
             // 
             this.btnViewReports.Location = new System.Drawing.Point(166, 43);
-            this.btnViewReports.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnViewReports.Margin = new System.Windows.Forms.Padding(4);
             this.btnViewReports.Name = "btnViewReports";
             this.btnViewReports.Size = new System.Drawing.Size(100, 28);
             this.btnViewReports.TabIndex = 1;
             this.btnViewReports.Text = "View Reports";
             this.btnViewReports.UseVisualStyleBackColor = true;
             this.btnViewReports.Click += new System.EventHandler(this.btnViewReports_Click);
+            // 
+            // budgetToolStripMenuItem
+            // 
+            this.budgetToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addBudgetToolStripMenuItem});
+            this.budgetToolStripMenuItem.Name = "budgetToolStripMenuItem";
+            this.budgetToolStripMenuItem.Size = new System.Drawing.Size(104, 24);
+            this.budgetToolStripMenuItem.Text = "Budget";
+            // 
+            // addBudgetToolStripMenuItem
+            // 
+            this.addBudgetToolStripMenuItem.Name = "addBudgetToolStripMenuItem";
+            this.addBudgetToolStripMenuItem.Size = new System.Drawing.Size(244, 26);
+            this.addBudgetToolStripMenuItem.Text = "Add Budget";
+            this.addBudgetToolStripMenuItem.Click += new System.EventHandler(this.addBudgetToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -104,7 +124,7 @@ namespace PersonalFinanceManager.Forms
             this.Controls.Add(this.btnViewReports);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -136,6 +156,12 @@ namespace PersonalFinanceManager.Forms
         {
             var reportForm = new ReportForm();
             reportForm.Show();
+        }
+
+        private void addBudgetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var addBudgetForm = new AddBudgetForm(_username);
+            addBudgetForm.Show();
         }
     }
 }
