@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing.Drawing2D;
+using System.Drawing;
 using System.Windows.Forms;
 using MongoDB.Bson;
 using PersonalFinanceManager.Controllers;
@@ -17,6 +19,9 @@ namespace PersonalFinanceManager.Forms
             _username = username;
             _accountController = new AccountController();
             LoadAccountTypeComboBox();
+            ApplyCustomTheme();
+            this.BackColor = Color.LawnGreen; // Set form background color
+            this.Font = new Font("Segoe UI", 9);
         }
 
         private void LoadAccountTypeComboBox()
@@ -44,6 +49,47 @@ namespace PersonalFinanceManager.Forms
         private void AddAccountForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void ApplyCustomTheme()
+        {
+            foreach (Control control in this.Controls)
+            {
+                if (control is Button)
+                {
+                    Button button = control as Button;
+                    button.FlatStyle = FlatStyle.Flat;
+                    button.BackColor = Color.DarkGreen;
+                    button.ForeColor = Color.White;
+                    button.FlatAppearance.BorderSize = 0;
+                    button.FlatAppearance.MouseOverBackColor = Color.ForestGreen;
+                    button.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+                }
+                else if (control is ComboBox)
+                {
+                    ComboBox comboBox = control as ComboBox;
+                    comboBox.BackColor = Color.White;
+                    comboBox.ForeColor = Color.Green;
+                    comboBox.FlatStyle = FlatStyle.Flat;
+                }
+                else if (control is TextBox)
+                {
+                    TextBox textBox = control as TextBox;
+                    textBox.BackColor = Color.White;
+                    textBox.ForeColor = Color.Green;
+                    textBox.BorderStyle = BorderStyle.FixedSingle;
+                }
+                // Apply similar styles to other controls as needed
+            }
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            using (LinearGradientBrush brush = new LinearGradientBrush(this.ClientRectangle, Color.LightGreen, Color.DarkOliveGreen, 90F))
+            {
+                e.Graphics.FillRectangle(brush, this.ClientRectangle);
+            }
         }
     }
 }
