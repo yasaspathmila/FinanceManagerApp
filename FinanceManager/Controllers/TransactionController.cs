@@ -14,12 +14,29 @@ namespace PersonalFinanceManager.Controllers
     {
         private readonly IMongoCollection<Transaction> _transactions;
         private readonly IMongoCollection<User> _users;
+        private readonly IMongoCollection<Account> _accounts;
+        private readonly BudgetController _budgetController;
+        private readonly AccountController _accountController;
 
         public TransactionController()
         {
             _transactions = DatabaseHelper.GetCollection<Transaction>("Transactions");
             _users = DatabaseHelper.GetCollection<User>("Users");
+            _budgetController = new BudgetController();
+            _accounts = DatabaseHelper.GetCollection<Account>("Accounts");
+            _accountController = new AccountController();
+        }
 
+        public Account GetAccountById(string accountId)
+        {
+            return _accounts.Find(a => a.Id == accountId).FirstOrDefault();
+        }
+
+        public void UpdateAccountBalance(string accountId, double newBalance)
+        {
+            var filter = Builders<Account>.Filter.Eq(a => a.Id, accountId);
+            var update = Builders<Account>.Update.Set(a => a.Balance, newBalance);
+            _accounts.UpdateOne(filter, update);
         }
 
 
@@ -27,11 +44,22 @@ namespace PersonalFinanceManager.Controllers
         {
             try
             {
-                var budgetController = new BudgetController();
-
-                if (!budgetController.IsWithinBudget(username, category, amount))
+                // Check account balance
+                var account = GetAccountById(accountId);
+                if (account == null)
                 {
-                    MessageBox.Show("This transaction exceeds your budget for the specified category.");
+                    throw new InvalidOperationException("Account not found.");
+                }
+                if (type == "Expense" && account.Balance < amount)
+                {
+                    throw new InvalidOperationException("Insufficient account balance.");
+                }
+
+                // Check if transaction exceeds the budget
+                var budget = _budgetController.GetBudgetByCategory(category);
+                if (budget != null && _budgetController.CalculateRemainingBudget(budget) < amount)
+                {
+                    throw new InvalidOperationException("Transaction exceeds the budget limit.");
                 }
 
                 // Retrieve the user information based on the username
@@ -56,12 +84,24 @@ namespace PersonalFinanceManager.Controllers
 
                 // Insert the transaction into the MongoDB collection
                 _transactions.InsertOne(transaction);
+
+                // Update the account balance
+                if (transaction.Type == "Expense")
+                {
+                    account.Balance -= transaction.Amount;
+                }
+                else if (transaction.Type == "Income")
+                {
+                    account.Balance += transaction.Amount;
+                }
+                _accountController.UpdateAccountBalance(transaction.AccountId.ToString(), account.Balance);
+
                 return true; // Indicate that the transaction was successful
             }
             catch (InvalidOperationException ex)
             {
                 // Show a message box when the budget limit is exceeded
-                System.Windows.Forms.MessageBox.Show(ex.Message, "Budget Limit Exceeded", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Warning);
+                System.Windows.Forms.MessageBox.Show(ex.Message, "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Warning);
                 return false; // Indicate that the transaction was not successful
             }
         }

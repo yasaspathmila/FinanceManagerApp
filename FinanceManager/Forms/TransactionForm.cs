@@ -38,6 +38,7 @@ namespace PersonalFinanceManager.Forms
                     MessageBox.Show("Transaction saved successfully.");
                     this.Close();
                 }
+                // If not successful, the message box is already shown in the controller
             }
             catch (FormatException)
             {

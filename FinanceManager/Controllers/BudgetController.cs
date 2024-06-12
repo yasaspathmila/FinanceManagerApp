@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using PersonalFinanceManager.Models;
@@ -10,10 +11,12 @@ namespace PersonalFinanceManager.Controllers
     public class BudgetController
     {
         private readonly IMongoCollection<Budget> _budgets;
+        private readonly IMongoCollection<Transaction> _transactions;
 
         public BudgetController()
         {
             _budgets = DatabaseHelper.GetCollection<Budget>("Budgets");
+            _transactions = DatabaseHelper.GetCollection<Transaction>("Transactions");
         }
 
         public void AddBudget(Budget budget)
@@ -55,6 +58,17 @@ namespace PersonalFinanceManager.Controllers
             }
 
             return totalSpent;
+        }
+
+        public Budget GetBudgetByCategory(string category)
+        {
+            return _budgets.Find(b => b.Category == category).FirstOrDefault();
+        }
+
+        public double CalculateRemainingBudget(Budget budget)
+        {
+            var totalSpent = _transactions.Find(t => t.Category == budget.Category && t.Type == "Expense").ToList().Sum(t => t.Amount);
+            return budget.Amount - totalSpent;
         }
     }
 }
