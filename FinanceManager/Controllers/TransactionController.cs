@@ -6,7 +6,6 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace PersonalFinanceManager.Controllers
 {
@@ -82,7 +81,7 @@ namespace PersonalFinanceManager.Controllers
                     Date = date
                 };
 
-                // Insert the transaction into the MongoDB collection
+                // Insert the transaction into the MongoDB 
                 _transactions.InsertOne(transaction);
 
                 // Update the account balance
@@ -110,6 +109,7 @@ namespace PersonalFinanceManager.Controllers
         {
             var user = _users.Find(u => u.Username == username).FirstOrDefault();
             string userId = user.Id.ToString();
+
             // Convert userId to ObjectId
             ObjectId objectId;
             if (!ObjectId.TryParse(userId, out objectId))

@@ -24,7 +24,7 @@ namespace PersonalFinanceManager.Utils
             {
                 // Handle connection error gracefully (log the error, display user message)
                 Console.WriteLine("Error connecting to MongoDB: " + ex.Message);
-                // You can throw a new exception here to propagate the error if needed
+                
             }
         }
 

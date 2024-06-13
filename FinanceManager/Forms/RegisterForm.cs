@@ -15,7 +15,7 @@ namespace PersonalFinanceManager.Forms
             InitializeComponent();
             _userController = new UserController();
             ApplyCustomTheme();
-            this.BackColor = Color.PaleGoldenrod; // Set form background color
+            this.BackColor = Color.PaleGoldenrod; 
             this.Font = new Font("Segoe UI", 10);
         }
 

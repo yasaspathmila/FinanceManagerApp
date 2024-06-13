@@ -7,6 +7,9 @@ using PersonalFinanceManager.Models;
 using System.Windows.Forms;
 using PersonalFinanceManager.Controllers;
 using System.Windows.Forms.DataVisualization.Charting;
+using MongoDB.Driver;
+using PersonalFinanceManager.Utils;
+
 
 namespace PersonalFinanceManager.Forms
 {
@@ -24,9 +27,10 @@ namespace PersonalFinanceManager.Forms
             _accountController = new AccountController();
             _budgetController = new BudgetController();
             _transactionController = new TransactionController();
-            LoadData();
+            LoadBudgetCharts();
+            PopulateAccountCards();
             ApplyCustomTheme();
-            this.BackColor = Color.LightBlue; // Set form background color
+            this.BackColor = Color.LightBlue; 
             this.Font = new Font("Segoe UI", 10);
         }
 
@@ -35,17 +39,6 @@ namespace PersonalFinanceManager.Forms
 
         }
 
-        private void LoadData()
-        {
-            LoadAccountBalances();
-            LoadBudgetCharts();
-        }
-
-        private void LoadAccountBalances()
-        {
-            var accounts = _accountController.GetAccountsByUserId(_username);
-            dataGridViewAccounts.DataSource = accounts.Select(a => new { a.Type, a.Balance }).ToList();
-        }
 
         private void LoadBudgetCharts()
         {
@@ -87,6 +80,44 @@ namespace PersonalFinanceManager.Forms
             chartRemainingBudgets.Invalidate();
             chartSpentBudgets.Invalidate();
         }
+
+        private void PopulateAccountCards()
+        {
+            var accounts = _accountController.GetAccountsByUserId(_username);
+
+            this.panelAccounts.Controls.Clear();
+
+            int yOffset = 10;
+            foreach (var account in accounts)
+            {
+                Panel card = new Panel
+                {
+                    Size = new Size(250, 100),
+                    Location = new Point(10, yOffset),
+                    BorderStyle = BorderStyle.FixedSingle,
+                    BackColor = Color.LightGray // You can customize the style
+                };
+
+                Label lblAccountType = new Label
+                {
+                    Text = $"Type: {account.Type}",
+                    Location = new Point(10, 10)
+                };
+                card.Controls.Add(lblAccountType);
+
+                Label lblAccountBalance = new Label
+                {
+                    Text = $"Balance: {account.Balance}",
+                    Location = new Point(10, 40)
+                };
+                card.Controls.Add(lblAccountBalance);
+
+                this.panelAccounts.Controls.Add(card);
+                yOffset += 110; // Adjust offset for the next card
+            }
+        }
+
+        
 
         private void ApplyCustomTheme()
         {
@@ -130,6 +161,11 @@ namespace PersonalFinanceManager.Forms
         }
 
         private void chartBudgetProgress_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void chartRemainingBudgets_Click(object sender, EventArgs e)
         {
 
         }

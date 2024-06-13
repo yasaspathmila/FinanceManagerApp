@@ -20,7 +20,7 @@ namespace PersonalFinanceManager.Forms
             _accountController = new AccountController();
             LoadAccountTypeComboBox();
             ApplyCustomTheme();
-            this.BackColor = Color.LawnGreen; // Set form background color
+            this.BackColor = Color.LawnGreen; 
             this.Font = new Font("Segoe UI", 9);
         }
 
@@ -79,7 +79,7 @@ namespace PersonalFinanceManager.Forms
                     textBox.ForeColor = Color.Green;
                     textBox.BorderStyle = BorderStyle.FixedSingle;
                 }
-                // Apply similar styles to other controls as needed
+                
             }
         }
 

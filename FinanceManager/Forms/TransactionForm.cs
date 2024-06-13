@@ -19,7 +19,7 @@ namespace PersonalFinanceManager.Forms
             _username = username;
             _transactionController = new TransactionController();
             ApplyCustomTheme();
-            this.BackColor = Color.LawnGreen; // Set form background color
+            this.BackColor = Color.LawnGreen; 
             this.Font = new Font("Segoe UI", 9);
 
         }
@@ -98,7 +98,7 @@ namespace PersonalFinanceManager.Forms
                     textBox.ForeColor = Color.Green;
                     textBox.BorderStyle = BorderStyle.FixedSingle;
                 }
-                // Apply similar styles to other controls as needed
+                
             }
         }
 

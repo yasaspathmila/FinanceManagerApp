@@ -5,7 +5,6 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using PersonalFinanceManager.Models;
 using PersonalFinanceManager.Utils;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace PersonalFinanceManager.Controllers
 {
@@ -39,7 +38,7 @@ namespace PersonalFinanceManager.Controllers
 
             if (budget == null)
             {
-                return true; // No budget set for this category, so it's within budget by default
+                return true; // No budget set for this category, so i assume that it's within budget by default
             }
 
             var totalSpent = GetTotalSpent(username, category, budget.StartDate, budget.EndDate);
@@ -48,9 +47,7 @@ namespace PersonalFinanceManager.Controllers
 
         private double GetTotalSpent(string username, string category, DateTime startDate, DateTime endDate)
         {
-            // This should interact with your transactions collection to get the total spent
-            // Assuming you have a TransactionController that can fetch transactions
-
+            
             var transactionController = new TransactionController();
             var transactions = transactionController.GetTransactionsByCategory(username, category, startDate, endDate);
             double totalSpent = 0;
