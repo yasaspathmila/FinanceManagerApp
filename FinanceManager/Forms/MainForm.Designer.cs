@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Windows.Forms.DataVisualization.Charting;
 using MongoDB.Bson;
+
 
 namespace PersonalFinanceManager.Forms
 {
@@ -16,6 +18,9 @@ namespace PersonalFinanceManager.Forms
         private System.Windows.Forms.ToolStripMenuItem addBudgetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem accountsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addAccountToolStripMenuItem;
+        private System.Windows.Forms.DataGridView dataGridViewAccounts;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartRemainingBudgets;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartSpentBudgets;
         private System.Windows.Forms.Button btnViewReports;
 
         protected override void Dispose(bool disposing)
@@ -33,14 +38,20 @@ namespace PersonalFinanceManager.Forms
             this.transactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewTransactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addTransactionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.budgetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addBudgetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnViewReports = new System.Windows.Forms.Button();
+            this.dataGridViewAccounts = new System.Windows.Forms.DataGridView();
+            this.chartRemainingBudgets = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chartSpentBudgets = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.menuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAccounts)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartRemainingBudgets)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartSpentBudgets)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -80,21 +91,6 @@ namespace PersonalFinanceManager.Forms
             this.addTransactionToolStripMenuItem.Text = "Add Transaction";
             this.addTransactionToolStripMenuItem.Click += new System.EventHandler(this.addTransactionToolStripMenuItem_Click);
             // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.logOutToolStripMenuItem});
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
-            this.exitToolStripMenuItem.Text = "Exit";
-            // 
-            // logOutToolStripMenuItem
-            // 
-            this.logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
-            this.logOutToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.logOutToolStripMenuItem.Text = "Log Out";
-            this.logOutToolStripMenuItem.Click += new System.EventHandler(this.logOutToolStripMenuItem_Click);
-            // 
             // budgetToolStripMenuItem
             // 
             this.budgetToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -115,19 +111,34 @@ namespace PersonalFinanceManager.Forms
             this.accountsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addAccountToolStripMenuItem});
             this.accountsToolStripMenuItem.Name = "accountsToolStripMenuItem";
-            this.accountsToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
+            this.accountsToolStripMenuItem.Size = new System.Drawing.Size(83, 24);
             this.accountsToolStripMenuItem.Text = "Accounts";
             // 
             // addAccountToolStripMenuItem
             // 
             this.addAccountToolStripMenuItem.Name = "addAccountToolStripMenuItem";
-            this.addAccountToolStripMenuItem.Size = new System.Drawing.Size(177, 26);
+            this.addAccountToolStripMenuItem.Size = new System.Drawing.Size(178, 26);
             this.addAccountToolStripMenuItem.Text = "Add Account";
             this.addAccountToolStripMenuItem.Click += new System.EventHandler(this.addAccountToolStripMenuItem_Click);
             // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.logOutToolStripMenuItem});
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(47, 24);
+            this.exitToolStripMenuItem.Text = "Exit";
+            // 
+            // logOutToolStripMenuItem
+            // 
+            this.logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
+            this.logOutToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
+            this.logOutToolStripMenuItem.Text = "Log Out";
+            this.logOutToolStripMenuItem.Click += new System.EventHandler(this.logOutToolStripMenuItem_Click);
+            // 
             // btnViewReports
             // 
-            this.btnViewReports.Location = new System.Drawing.Point(166, 43);
+            this.btnViewReports.Location = new System.Drawing.Point(135, 430);
             this.btnViewReports.Margin = new System.Windows.Forms.Padding(4);
             this.btnViewReports.Name = "btnViewReports";
             this.btnViewReports.Size = new System.Drawing.Size(100, 28);
@@ -136,6 +147,39 @@ namespace PersonalFinanceManager.Forms
             this.btnViewReports.UseVisualStyleBackColor = true;
             this.btnViewReports.Click += new System.EventHandler(this.btnViewReports_Click);
             // 
+            // dataGridViewAccounts
+            // 
+            this.dataGridViewAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewAccounts.Location = new System.Drawing.Point(12, 70);
+            this.dataGridViewAccounts.Name = "dataGridViewAccounts";
+            this.dataGridViewAccounts.RowHeadersWidth = 51;
+            this.dataGridViewAccounts.Size = new System.Drawing.Size(240, 150);
+            this.dataGridViewAccounts.TabIndex = 0;
+            // 
+            // chartRemainingBudgets
+            // 
+            this.chartRemainingBudgets.Location = new System.Drawing.Point(270, 70);
+            this.chartRemainingBudgets.Name = "chartRemainingBudgets";
+            this.chartRemainingBudgets.Size = new System.Drawing.Size(300, 300);
+            this.chartRemainingBudgets.TabIndex = 1;
+            this.chartRemainingBudgets.Text = "Remaining Budgets";
+            ChartArea chartArea1 = new ChartArea();
+            Legend legend1 = new Legend();
+            this.chartRemainingBudgets.ChartAreas.Add(chartArea1);
+            this.chartRemainingBudgets.Legends.Add(legend1);
+            // 
+            // chartSpentBudgets
+            // 
+            this.chartSpentBudgets.Location = new System.Drawing.Point(590, 70);
+            this.chartSpentBudgets.Name = "chartSpentBudgets";
+            this.chartSpentBudgets.Size = new System.Drawing.Size(300, 300);
+            this.chartSpentBudgets.TabIndex = 2;
+            this.chartSpentBudgets.Text = "Spent Budgets";
+            ChartArea chartArea2 = new ChartArea();
+            Legend legend2 = new Legend();
+            this.chartSpentBudgets.ChartAreas.Add(chartArea2);
+            this.chartSpentBudgets.Legends.Add(legend2);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -143,6 +187,9 @@ namespace PersonalFinanceManager.Forms
             this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.btnViewReports);
             this.Controls.Add(this.menuStrip);
+            this.Controls.Add(this.dataGridViewAccounts);
+            this.Controls.Add(this.chartRemainingBudgets);
+            this.Controls.Add(this.chartSpentBudgets);
             this.MainMenuStrip = this.menuStrip;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
@@ -150,6 +197,9 @@ namespace PersonalFinanceManager.Forms
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAccounts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartRemainingBudgets)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartSpentBudgets)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
