@@ -259,6 +259,7 @@ namespace PersonalFinanceManager.Forms
         private void addTransactionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var transactionForm = new TransactionForm(_username);
+            transactionForm.TransactionSaved += AddTransactionForm_TransactionSaved;
             transactionForm.Show();
         }
 
@@ -274,6 +275,7 @@ namespace PersonalFinanceManager.Forms
         private void addBudgetToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var addBudgetForm = new AddBudgetForm(_username);
+            addBudgetForm.budgetSaved += AddBudgetForm_budgetSaved;
             addBudgetForm.Show();
         }
 
@@ -281,6 +283,16 @@ namespace PersonalFinanceManager.Forms
         {
             var addAccountForm = new AddAccountForm(_username);
             addAccountForm.Show();
+        }
+
+        private void AddTransactionForm_TransactionSaved(object sender, EventArgs e)
+        {
+            LoadBudgetCharts();
+        }
+
+        private void AddBudgetForm_budgetSaved(object sender, EventArgs e)
+        {
+            LoadBudgetCharts();
         }
 
     }

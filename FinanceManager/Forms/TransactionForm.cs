@@ -12,6 +12,7 @@ namespace PersonalFinanceManager.Forms
     {
         private readonly TransactionController _transactionController;
         private readonly string _username;
+        public event EventHandler TransactionSaved;
 
         public TransactionForm(string username)
         {
@@ -40,6 +41,7 @@ namespace PersonalFinanceManager.Forms
                 bool isSuccess = _transactionController.AddTransaction(_username, accountId, type, amount, category, payee, date);
                 if (isSuccess)
                 {
+                    TransactionSaved?.Invoke(this, EventArgs.Empty);
                     MessageBox.Show("Transaction saved successfully.");
                     this.Close();
                 }
