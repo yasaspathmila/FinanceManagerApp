@@ -12,6 +12,7 @@ namespace PersonalFinanceManager.Forms
     {
         private readonly string _username;
         private readonly BudgetController _budgetController;
+        public event EventHandler budgetSaved;
 
         public AddBudgetForm(string username)
         {
@@ -41,6 +42,7 @@ namespace PersonalFinanceManager.Forms
             };
 
             _budgetController.AddBudget(budget);
+            budgetSaved?.Invoke(this, EventArgs.Empty);
             MessageBox.Show("Budget added successfully.");
             this.Close();
         }
